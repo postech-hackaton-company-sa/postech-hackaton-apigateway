@@ -1,0 +1,45 @@
+server:
+  port: 8083
+spring:
+  application.name: backend-gateway-client
+  cloud:
+    gateway:
+      routes:
+        - id: ponto-eletronico
+          uri: http://localhost:8080
+          predicates:
+            Path=/v**/ponto-eletronico/**
+        - id: relatorios
+          uri: http://localhost:8081
+          predicates:
+            Path=/v**/relatorios/**
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          gateway:
+#            provider: my-provider
+#            client-id: my_client
+#            client-secret: aOyyGvQevEPaXL601LlbgSDMPxbuJCuo
+#            authorization-grant-type: authorization_code
+#            redirect-uri: "http://localhost:8083/login/oauth2/code/{registrationId}"
+#            scope: openid, message.read
+#        provider:
+#          my-provider:
+#            issuer-uri: http://backend-keycloak-auth:8080/auth/realms/my_realm
+
+spring.security.oauth2:
+  resourceserver:
+    jwt:
+      jwk-set-uri: http://localhost:9080/realms/test/protocol/openid-connect/certs
+  client:
+    provider:
+      keycloak:
+        issuer-uri: http://localhost:9080/realms/test
+    registration:
+      spring-with-test-scope:
+        provider: keycloak
+        client-id: funcionario
+        client-secret: dZuVrdf1zt4tlyGQTIkmyP9eWbXwBOav
+        authorization-grant-type: authorization_code
+        scope: openid
