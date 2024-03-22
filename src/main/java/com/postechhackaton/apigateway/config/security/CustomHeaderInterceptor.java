@@ -38,7 +38,7 @@ public class CustomHeaderInterceptor implements WebFilter {
                 .flatMap(chain::filter);
     }
 
-    private HttpHeaders convertJwtToHeaders(Jwt jwt) {
+    HttpHeaders convertJwtToHeaders(Jwt jwt) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("email", jwt.getClaimAsString("email"));
         headers.add("system", jwt.getClaimAsString("azp"));
