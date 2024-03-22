@@ -13,21 +13,6 @@ spring:
           uri: http://localhost:8081
           predicates:
             Path=/v**/relatorios/**
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          gateway:
-#            provider: my-provider
-#            client-id: my_client
-#            client-secret: aOyyGvQevEPaXL601LlbgSDMPxbuJCuo
-#            authorization-grant-type: authorization_code
-#            redirect-uri: "http://localhost:8083/login/oauth2/code/{registrationId}"
-#            scope: openid, message.read
-#        provider:
-#          my-provider:
-#            issuer-uri: http://backend-keycloak-auth:8080/auth/realms/my_realm
-
 spring.security.oauth2:
   resourceserver:
     jwt:

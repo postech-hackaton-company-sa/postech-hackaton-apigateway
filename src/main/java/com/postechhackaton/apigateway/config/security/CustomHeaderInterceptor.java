@@ -12,6 +12,8 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+
 @Component
 public class CustomHeaderInterceptor implements WebFilter {
 
@@ -39,7 +41,10 @@ public class CustomHeaderInterceptor implements WebFilter {
     private HttpHeaders convertJwtToHeaders(Jwt jwt) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("email", jwt.getClaimAsString("email"));
-        headers.add("role", jwt.getClaimAsString("azp"));
+        headers.add("system", jwt.getClaimAsString("azp"));
+        headers.add("roles", String.join( ", ", (ArrayList<String>) jwt.getClaimAsMap("realm_access").get("roles")));
+        headers.add("name", jwt.getClaimAsString("given_name"));
+        headers.add("familyName", jwt.getClaimAsString("family_name"));
         headers.add("username", jwt.getClaimAsString("preferred_username"));
         return headers;
     }
