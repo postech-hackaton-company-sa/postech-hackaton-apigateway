@@ -13,6 +13,10 @@ spring:
           uri: http://localhost:8081
           predicates:
             Path=/v**/relatorios/**
+        - id: funcionarios
+          uri: http://localhost:8082
+          predicates:
+            Path=/v**/funcionarios/**
 spring.security.oauth2:
   resourceserver:
     jwt:
