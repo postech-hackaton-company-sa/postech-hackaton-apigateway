@@ -68,7 +68,6 @@ public class CustomHeaderInterceptorTest {
 
         customHeaderInterceptor.filter(exchange, chain).block();
 
-//        verify(serverHttpRequest).mutate();
         verify(chain).filter(any());
     }
 
