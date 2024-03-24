@@ -72,5 +72,6 @@ sonar {
 		property "sonar.projectKey", "postech-hackaton-company-sa_postech-hackaton-apigateway"
 		property "sonar.organization", "postech-hackaton-company-sa"
 		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.coverage.exclusions", "60"
 	}
 }
