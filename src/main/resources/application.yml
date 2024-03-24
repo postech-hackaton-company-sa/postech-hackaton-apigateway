@@ -1,34 +1,41 @@
 server:
-  port: 8083
+  port: 8080
+
+logging:
+  level:
+    root: ${LOGGING_LEVEL_ROOT}
+
 spring:
+  profiles:
+    active: dev
   application.name: backend-gateway-client
   cloud:
     gateway:
       routes:
         - id: ponto-eletronico
-          uri: http://localhost:8080
+          uri: ${API_PONTO_ELETRONICO}
           predicates:
             Path=/v**/ponto-eletronico/**
         - id: relatorios
-          uri: http://localhost:8081
+          uri: ${API_RELATORIO}
           predicates:
             Path=/v**/relatorios/**
         - id: funcionarios
-          uri: http://localhost:8082
+          uri: ${API_FUNCIONARIOS}
           predicates:
             Path=/v**/funcionarios/**
 spring.security.oauth2:
   resourceserver:
     jwt:
-      jwk-set-uri: http://localhost:9080/realms/test/protocol/openid-connect/certs
+      jwk-set-uri: ${KEYCLOAK_URL}/realms/test/protocol/openid-connect/certs
   client:
     provider:
       keycloak:
-        issuer-uri: http://localhost:9080/realms/test
+        issuer-uri: ${KEYCLOAK_URL}/realms/test
     registration:
       spring-with-test-scope:
         provider: keycloak
-        client-id: funcionario
-        client-secret: dZuVrdf1zt4tlyGQTIkmyP9eWbXwBOav
+        client-id: ${KEYCLOAK_CLIENT_ID}
+        client-secret: ${KEYCLOAK_CLIENT_SECRET}
         authorization-grant-type: authorization_code
         scope: openid
